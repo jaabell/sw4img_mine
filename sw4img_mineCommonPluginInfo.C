@@ -38,7 +38,7 @@
 
 #include <sw4img_minePluginInfo.h>
 #include <avtsw4img_mineFileFormat.h>
-#include <avtSTMDFileFormatInterface.h>
+#include <avtMTMDFileFormatInterface.h>
 #include <avtGenericDatabase.h>
 
 // ****************************************************************************
@@ -54,7 +54,7 @@
 DatabaseType
 sw4img_mineCommonPluginInfo::GetDatabaseType()
 {
-    return DB_TYPE_STMD;
+    return DB_TYPE_MTMD;
 }
 
 // ****************************************************************************
@@ -78,13 +78,13 @@ avtDatabase *
 sw4img_mineCommonPluginInfo::SetupDatabase(const char *const *list,
         int nList, int nBlock)
 {
-    avtSTMDFileFormat **ffl = new avtSTMDFileFormat*[nList];
+    avtMTMDFileFormat **ffl = new avtMTMDFileFormat*[nList];
     for (int i = 0 ; i < nList ; i++)
     {
         ffl[i] = new avtsw4img_mineFileFormat(list[i]);
     }
-    avtSTMDFileFormatInterface *inter
-        = new avtSTMDFileFormatInterface(ffl, nList);
+    avtMTMDFileFormatInterface *inter
+        = new avtMTMDFileFormatInterface(ffl, nList);
     return new avtGenericDatabase(inter);
 }
 // ****************************************************************************

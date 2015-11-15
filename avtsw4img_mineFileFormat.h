@@ -43,7 +43,7 @@
 #ifndef AVT_sw4img_mine_FILE_FORMAT_H
 #define AVT_sw4img_mine_FILE_FORMAT_H
 
-#include <avtSTMDFileFormat.h>
+#include <avtMTMDFileFormat.h>
 
 #include <vector>
 #include <string>
@@ -60,7 +60,7 @@
 //
 // ****************************************************************************
 
-class avtsw4img_mineFileFormat : public avtSTMDFileFormat
+class avtsw4img_mineFileFormat : public avtMTMDFileFormat
 {
 public:
     avtsw4img_mineFileFormat(const char *);
@@ -84,6 +84,7 @@ public:
     //
     // virtual int         GetCycle(void);
     //
+    virtual int            GetNTimesteps(void);
 
     virtual const char    *GetType(void)
     {
@@ -91,14 +92,14 @@ public:
     };
     virtual void           FreeUpResources(void);
 
-    virtual vtkDataSet    *GetMesh(int, const char *);
-    virtual vtkDataArray  *GetVar(int, const char *);
-    virtual vtkDataArray  *GetVectorVar(int, const char *);
+    virtual vtkDataSet    *GetMesh(int, int, const char *);
+    virtual vtkDataArray  *GetVar(int, int, const char *);
+    virtual vtkDataArray  *GetVectorVar(int, int, const char *);
 
 protected:
     // DATA MEMBERS
 
-    virtual void           PopulateDatabaseMetaData(avtDatabaseMetaData *);
+    virtual void           PopulateDatabaseMetaData(avtDatabaseMetaData *, int);
 
     // imagevolume data
     void Initialize();
@@ -110,6 +111,8 @@ protected:
     std::vector<float*> m_dataptr;
     std::vector<float*> m_gridptr;
     std::string m_filename;
+    std::vector<std::string> m_filelist;
+
 //    std::string m_gridname; // not needed anymore?
 //    std::string m_gridfilename; // not needed anymore?
     int m_prec;
