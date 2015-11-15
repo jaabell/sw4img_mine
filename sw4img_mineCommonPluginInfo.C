@@ -1,6 +1,6 @@
 /*****************************************************************************
 *
-* Copyright (c) 2000 - 2014, Lawrence Livermore National Security, LLC
+* Copyright (c) 2000 - 2015, Lawrence Livermore National Security, LLC
 * Produced at the Lawrence Livermore National Laboratory
 * LLNL-CODE-442911
 * All rights reserved.
@@ -76,15 +76,17 @@ sw4img_mineCommonPluginInfo::GetDatabaseType()
 // ****************************************************************************
 avtDatabase *
 sw4img_mineCommonPluginInfo::SetupDatabase(const char *const *list,
-        int nList, int nBlock)
+                                   int nList, int nBlock)
 {
-    avtMTMDFileFormat **ffl = new avtMTMDFileFormat*[nList];
-    for (int i = 0 ; i < nList ; i++)
+    // ignore any nBlocks past 1
+    int nTimestepGroups = nList / nBlock;
+    avtMTMDFileFormat **ffl = new avtMTMDFileFormat*[nTimestepGroups];
+    for (int i = 0 ; i < nTimestepGroups ; i++)
     {
-        ffl[i] = new avtsw4img_mineFileFormat(list[i]);
+        ffl[i] = new avtsw4img_mineFileFormat(list[i*nBlock]);
     }
-    avtMTMDFileFormatInterface *inter
-        = new avtMTMDFileFormatInterface(ffl, nList);
+    avtMTMDFileFormatInterface *inter 
+           = new avtMTMDFileFormatInterface(ffl, nTimestepGroups);
     return new avtGenericDatabase(inter);
 }
 // ****************************************************************************

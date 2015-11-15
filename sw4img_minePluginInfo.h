@@ -1,6 +1,6 @@
 /*****************************************************************************
 *
-* Copyright (c) 2000 - 2014, Lawrence Livermore National Security, LLC
+* Copyright (c) 2000 - 2015, Lawrence Livermore National Security, LLC
 * Produced at the Lawrence Livermore National Laboratory
 * LLNL-CODE-442911
 * All rights reserved.
@@ -40,8 +40,8 @@
 //                               sw4img_minePluginInfo.h
 // ****************************************************************************
 
-#ifndef SW4IMG_PLUGIN_INFO_H
-#define SW4IMG_PLUGIN_INFO_H
+#ifndef SW4IMG_MINE_PLUGIN_INFO_H
+#define SW4IMG_MINE_PLUGIN_INFO_H
 #include <DatabasePluginInfo.h>
 #include <database_plugin_exports.h>
 
@@ -65,7 +65,7 @@ class avtDatabaseWriter;
 
 class sw4img_mineGeneralPluginInfo : public virtual GeneralDatabasePluginInfo
 {
-public:
+  public:
     virtual const char *GetName() const;
     virtual const char *GetVersion() const;
     virtual const char *GetID() const;
@@ -78,23 +78,23 @@ public:
 
 class sw4img_mineCommonPluginInfo : public virtual CommonDatabasePluginInfo, public virtual sw4img_mineGeneralPluginInfo
 {
-public:
+  public:
     virtual DatabaseType              GetDatabaseType();
     virtual avtDatabase              *SetupDatabase(const char * const *list,
-            int nList, int nBlock);
+                                                    int nList, int nBlock);
     virtual std::string               GetLicense() const;
 };
 
 class sw4img_mineMDServerPluginInfo : public virtual MDServerDatabasePluginInfo, public virtual sw4img_mineCommonPluginInfo
 {
-public:
+  public:
     // this makes compilers happy... remove if we ever have functions here
     virtual void dummy();
 };
 
 class sw4img_mineEnginePluginInfo : public virtual EngineDatabasePluginInfo, public virtual sw4img_mineCommonPluginInfo
 {
-public:
+  public:
     virtual avtDatabaseWriter        *GetWriter(void);
 };
 

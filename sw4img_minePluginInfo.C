@@ -1,6 +1,6 @@
 /*****************************************************************************
 *
-* Copyright (c) 2000 - 2014, Lawrence Livermore National Security, LLC
+* Copyright (c) 2000 - 2015, Lawrence Livermore National Security, LLC
 * Produced at the Lawrence Livermore National Laboratory
 * LLNL-CODE-442911
 * All rights reserved.
@@ -43,7 +43,7 @@
 #include <sw4img_minePluginInfo.h>
 
 #include <visit-config.h>
-VISIT_PLUGIN_VERSION(sw4img_mine, DBP_EXPORT)
+VISIT_PLUGIN_VERSION(sw4img_mine,DBP_EXPORT)
 
 // ****************************************************************************
 //  Function:  GetGeneralInfo
@@ -95,7 +95,7 @@ sw4img_mineGeneralPluginInfo::GetName() const
 const char *
 sw4img_mineGeneralPluginInfo::GetVersion() const
 {
-    return "1.0";
+    return "2.0";
 }
 
 // ****************************************************************************
@@ -114,7 +114,7 @@ sw4img_mineGeneralPluginInfo::GetVersion() const
 const char *
 sw4img_mineGeneralPluginInfo::GetID() const
 {
-    return "sw4img_mine_1.0";
+    return "sw4img_mine_2.0";
 }
 // ****************************************************************************
 //  Method: sw4img_mineGeneralPluginInfo::EnabledByDefault
@@ -166,7 +166,7 @@ std::vector<std::string>
 sw4img_mineGeneralPluginInfo::GetDefaultFilePatterns() const
 {
     std::vector<std::string> defaultPatterns;
-    defaultPatterns.push_back("sw4img_mine");
+    defaultPatterns.push_back("*.sw4img");
 
     return defaultPatterns;
 }
